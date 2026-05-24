@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.pianino.ui.AppController">
+
+    <VBox AnchorPane.topAnchor="20"
+          AnchorPane.leftAnchor="20"
+          AnchorPane.rightAnchor="20"
+          AnchorPane.bottomAnchor="260"
+          spacing="16">
+        <HBox spacing="24" prefHeight="200">
+
+            <VBox fx:id="settingsPane"
+                  prefWidth="480"
+                  spacing="12"
+                  styleClass="settings-section"/>
+
+            <Pane styleClass="vertical-separator"/>
+
+            <VBox fx:id="rightPane"
+                  spacing="12"
+                  HBox.hgrow="ALWAYS"/>
+
+        </HBox>
+    </VBox>
+
+    <Pane fx:id="pianoPane"
+          AnchorPane.leftAnchor="0"
+          AnchorPane.rightAnchor="0"
+          AnchorPane.bottomAnchor="10"
+          prefHeight="220"/>
+
+</AnchorPane>

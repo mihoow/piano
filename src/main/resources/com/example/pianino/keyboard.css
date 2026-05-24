@@ -1,0 +1,56 @@
+.piano-key-shadow {
+    -fx-background-color: rgba(0, 0, 0, 0.35);
+    -fx-background-radius: 0 0 8 8;
+    -fx-translate-y: 6;
+}
+
+.piano-key {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-background-radius: 0 0 8 8;
+    -fx-border-radius: 0 0 8 8;
+}
+
+/*.piano-key:active {*/
+/*    -fx-background-color: #dddddd;*/
+/*}*/
+
+.white-key {
+    -fx-background-color: white;
+}
+
+.white-key:active {
+    -fx-background-color: #dddddd;
+}
+
+.black-key {
+    -fx-background-color: black;
+}
+
+.white-key-content {
+    -fx-alignment: bottom-center;
+    -fx-spacing: 16;
+    -fx-padding: 0 0 8 0;
+}
+
+.black-key-content {
+    -fx-alignment: top-center;
+    -fx-spacing: 56;
+    -fx-padding: 8 0 0 0;
+}
+
+.white-key .tone-label {
+    -fx-text-fill: #999999;
+}
+
+.black-key .tone-label {
+    -fx-text-fill: #cccccc;
+}
+
+.shortcut-label {
+    -fx-background-color: #dddddd;
+    -fx-text-fill: black;
+    -fx-padding: 2 5;
+    -fx-background-radius: 4;
+    -fx-font-size: 10;
+}
