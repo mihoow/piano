@@ -118,7 +118,7 @@ public class RecordingsManager {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Wybierz plik MIDI");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("MIDI files", "*.mid", "*.midi")
+                new FileChooser.ExtensionFilter("MIDI files", "*.mid", "*.midi", "*.MID", "*.MIDI")
         );
 
         File file = fileChooser.showOpenDialog(ownerWindow);
