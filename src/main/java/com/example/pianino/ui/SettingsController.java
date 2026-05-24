@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SettingsController {
@@ -35,13 +36,13 @@ public class SettingsController {
             piano.setInstrument(instrument);
         });
 
-        Map<Short, String> octaveRanges = Map.of(
-                (short) -2, "C1 – B3",
-                (short) -1, "C2 – B4",
-                (short) 0,  "C3 – B5",
-                (short) 1,  "C4 – B6",
-                (short) 2,  "C5 – B7"
-        );
+        Map<Short, String> octaveRanges = new LinkedHashMap<>();
+        octaveRanges.put((short) -2, "C1 – B3");
+        octaveRanges.put((short) -1, "C2 – B4");
+        octaveRanges.put((short) 0,  "C3 – B5");
+        octaveRanges.put((short) 1,  "C4 – B6");
+        octaveRanges.put((short) 2,  "C5 – B7");
+
         ComboBox<String> octaveRangeSelect = new ComboBox<>();
         octaveRangeSelect.getItems().addAll(octaveRanges.values());
         octaveRangeSelect.setValue(octaveRanges.get(piano.getOctaveOffset()));
