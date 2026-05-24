@@ -5,7 +5,6 @@ import javafx.scene.input.KeyCode;
 
 import java.util.Map;
 
-import com.example.pianino.core.Piano;
 import com.example.pianino.core.PianoKey;
 
 public class ComputerKeyboardHandler {

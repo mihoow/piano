@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 
+import java.util.Map;
+
 public class SettingsController {
 
     private final VBox root;
@@ -25,7 +27,7 @@ public class SettingsController {
 
         ComboBox<PianoInstrument> instrumentSelect = new ComboBox<>();
         instrumentSelect.getItems().addAll(PianoInstrument.values());
-        instrumentSelect.setValue(PianoInstrument.ACOUSTIC_GRAND);
+        instrumentSelect.setValue(piano.getInstrument());
         instrumentSelect.setMaxWidth(Double.MAX_VALUE);
 
         instrumentSelect.setOnAction(event -> {
@@ -33,30 +35,28 @@ public class SettingsController {
             piano.setInstrument(instrument);
         });
 
-        ComboBox<String> octaveRangeSelect = new ComboBox<>();
-        octaveRangeSelect.getItems().addAll(
-                "C1 – B3",
-                "C2 – B4",
-                "C3 – B5",
-                "C4 – B6",
-                "C5 – B7"
+        Map<Short, String> octaveRanges = Map.of(
+                (short) -2, "C1 – B3",
+                (short) -1, "C2 – B4",
+                (short) 0,  "C3 – B5",
+                (short) 1,  "C4 – B6",
+                (short) 2,  "C5 – B7"
         );
-        octaveRangeSelect.setValue("C3 – B5");
+        ComboBox<String> octaveRangeSelect = new ComboBox<>();
+        octaveRangeSelect.getItems().addAll(octaveRanges.values());
+        octaveRangeSelect.setValue(octaveRanges.get(piano.getOctaveOffset()));
         octaveRangeSelect.setMaxWidth(Double.MAX_VALUE);
 
         octaveRangeSelect.setOnAction(event -> {
-            String value = octaveRangeSelect.getValue();
-
-            switch (value) {
-                case "C1 – B3" -> piano.setOctaveOffset((short)-2);
-                case "C2 – B4" -> piano.setOctaveOffset((short)-1);
-                case "C3 – B5" -> piano.setOctaveOffset((short)0);
-                case "C4 – B6" -> piano.setOctaveOffset((short)1);
-                case "C5 – B7" -> piano.setOctaveOffset((short)2);
-            }
+            String curr = octaveRangeSelect.getValue();
+            octaveRanges.forEach((offset, label) -> {
+                if (label.equals(curr)) {
+                    piano.setOctaveOffset(offset);
+                }
+            });
         });
 
-        Slider velocitySlider = new Slider(1, 127, 90);
+        Slider velocitySlider = new Slider(1, 127, piano.getVelocity());
         velocitySlider.setShowTickLabels(true);
         velocitySlider.setShowTickMarks(true);
         velocitySlider.setMajorTickUnit(32);

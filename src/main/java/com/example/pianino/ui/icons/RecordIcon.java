@@ -43,10 +43,6 @@ public class RecordIcon implements Icon {
         return root;
     }
 
-    public void playAnimation() {
-        pulseAnimation.play();
-    }
-
     public void stopAnimation() {
         pulseAnimation.stop();
 
