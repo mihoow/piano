@@ -16,14 +16,14 @@ public class Recording implements Instrument, AutoCloseable {
     private final Sequence sequence;
     private final Track track;
 
-    private final long startedAt;
+    private long startedAt;
     private Long stoppedAt = null;
 
     public Recording(Piano piano) throws InvalidMidiDataException {
         this.piano = piano;
         this.sequence = new Sequence(Sequence.PPQ, PPQ);
         this.track = sequence.createTrack();
-        this.startedAt = System.currentTimeMillis();
+        this.startedAt = -1;
 
         addTempoEvent();
     }
@@ -32,6 +32,10 @@ public class Recording implements Instrument, AutoCloseable {
     public int noteOn(PianoKey key) {
         if (isStopped()) {
             return -1;
+        }
+
+        if (startedAt == -1) {
+            startedAt = System.currentTimeMillis();
         }
 
         int midi = piano.noteOn(key);
@@ -64,6 +68,8 @@ public class Recording implements Instrument, AutoCloseable {
     }
 
     private long currentTick() {
+        if (startedAt == -1) return 0;
+
         long elapsedMs = System.currentTimeMillis() - startedAt;
 
         double msPerQuarterNote = MILLISECONDS_PER_MINUTE / BPM;
@@ -103,6 +109,8 @@ public class Recording implements Instrument, AutoCloseable {
      * Returns recording duration in seconds.
      */
     public double getDuration() {
+        if (startedAt == -1) return 0;
+
         long end = stoppedAt != null ? stoppedAt : System.currentTimeMillis();
         return (end - startedAt) / 1000.0;
     }
