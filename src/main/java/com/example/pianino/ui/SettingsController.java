@@ -64,7 +64,7 @@ public class SettingsController {
         velocitySlider.setBlockIncrement(1);
 
         velocitySlider.valueProperty().addListener((obs, oldValue, newValue) -> {
-            piano.setVelocity(newValue.byteValue());
+            piano.setVelocity(newValue.intValue());
         });
 
         root.getChildren().addAll(

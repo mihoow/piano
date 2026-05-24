@@ -2,6 +2,7 @@ package com.example.pianino.core;
 
 import javax.sound.midi.*;
 import java.io.File;
+import java.io.IOException;
 
 public class Player implements AutoCloseable {
     private final Sequence sequence;
@@ -26,12 +27,12 @@ public class Player implements AutoCloseable {
         });
     }
 
-    public static Player fromFile(File file) throws Exception {
+    public static Player fromFile(File file) throws MidiUnavailableException, InvalidMidiDataException, IOException {
         Sequence sequence = MidiSystem.getSequence(file);
         return new Player(sequence, file.getName());
     }
 
-    public static Player fromSequence(Sequence sequence) throws Exception {
+    public static Player fromSequence(Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
         return new Player(sequence, "");
     }
 

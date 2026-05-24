@@ -9,7 +9,7 @@ public class Piano implements Instrument {
 
     private final MidiChannel synthChannel;
 
-    public Piano() throws Exception {
+    public Piano() throws MidiUnavailableException {
         instrument = PianoInstrument.ACOUSTIC_GRAND;
         velocity = 90;
         octaveOffset = 0;
@@ -31,12 +31,15 @@ public class Piano implements Instrument {
         synthChannel.programChange(instrument.getProgram());
     }
 
-    public byte getVelocity() {
-        return velocity;
+    public int getVelocity() {
+        return (int)velocity;
     }
 
-    public void setVelocity(byte velocity) {
-        this.velocity = velocity;
+    public void setVelocity(int velocity) {
+        if (velocity < 0 || velocity > 127) {
+            throw new IllegalArgumentException("Siła nacisku musi być między 0 a 127");
+        }
+        this.velocity = (byte)velocity;
     }
 
     public short getOctaveOffset() {
@@ -44,6 +47,9 @@ public class Piano implements Instrument {
     }
 
     public void setOctaveOffset(short octaveOffset) {
+        if (octaveOffset < -2 || octaveOffset > 2) {
+            throw new IllegalArgumentException("Przesunięcie oktawy musi być między -2 a 2");
+        }
         this.octaveOffset = octaveOffset;
     }
 
